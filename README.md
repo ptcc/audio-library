@@ -15,5 +15,6 @@ The song metadata search api url is also stored in the same .env file, and shoul
 
 ## next improvements
 - add upload capabilities
+- add local cache for metadata API
 - add unit tests
-
+- dockerize
