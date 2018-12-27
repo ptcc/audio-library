@@ -14,7 +14,12 @@ The song metadata search api url is also stored in the same .env file, and shoul
 - run `node .`
 
 ## next improvements
-- add upload capabilities
-- add local cache for metadata API
 - add unit tests
 - dockerize
+- add local cache for metadata API
+- add paging on songs list
+
+## possible future features
+- filters over songs list
+- upload capabilities
+- authentication
