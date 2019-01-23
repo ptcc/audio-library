@@ -14,7 +14,16 @@ const audioRequestHandler = (req, res) => {
   });
 
   // Pipe download stream to response
-  downloadStream.pipe(res);
+  console.log(Date())
+  const responseStream = downloadStream.pipe(res);
+  responseStream.on("close", ()=>{
+    console.log(Date(),"responseStream closed");
+    downloadStream.unpipe(res);
+    downloadStream.destroy();})
+  downloadStream.on("close", ()=>console.log("downloadStream closed"))
+  //downloadStream.on('data', chunk => console.log('sending '+chunk.length));
+  downloadStream.on('error', error => console.log('*error* '+error));
+  downloadStream.on('end', () => console.log('downloadStream ended'));
 };
 
 module.exports = { audioRequestHandler };

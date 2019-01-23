@@ -7,7 +7,7 @@ const listRouteHandler = async (req, res) => {
     const files = await list();
     const songAPIUrls = files
         .filter(R.endsWith(".mp3"))
-        .map(R.concat(`http://${req.headers.host}${req.originalUrl}`))
+        .map(R.concat(`http://${req.headers.host}${req.baseUrl}/`))
     res.send(songAPIUrls);
   } catch (err) {
     console.error(err);

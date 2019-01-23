@@ -17,7 +17,8 @@ const metadataRequestHandler = (req, res) => {
     .then(
       R.assoc("audio", `http://${req.headers.host}${req.originalUrl}/audio`)
     )
+    .then(R.when(R.complement(R.prop("title")), R.assoc("title", searchString)))
     .then(bestMatch => res.send(bestMatch));
-}
+};
 
 module.exports = { getMetadata, metadataRequestHandler };

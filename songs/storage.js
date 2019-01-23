@@ -14,9 +14,13 @@ const list = () =>
   s3
     .listObjectsV2({ Bucket: S3_BUCKET, Delimiter: "/" })
     .promise()
-    .then(data => R.pluck("Key", (data && data.Contents) || []));
+    .then(R.propOr([], "Contents"))
+    .then(R.pluck("Key"));
 
-const stream = file =>
-  s3.getObject({ Bucket: S3_BUCKET, Key: file }).createReadStream();
+const stream = file =>{
+  const req=s3.getObject({ Bucket: S3_BUCKET, Key: file });
+  req.on('error',err=>console.log('*error*', err));
+  return req.createReadStream();
+}
 
 module.exports = { list, stream };
